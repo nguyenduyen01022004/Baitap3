@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AES Encrypt/Decrypt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe4f0, #ffccf9);
+      color: #5d1049;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 15px;
+    }
+    .container {
+      background: #fff0f6;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 30px 40px 40px;
+      box-shadow: 0 12px 30px rgba(255, 105, 180, 0.3);
+      user-select: none;
+    }
+    h1 {
+      margin: 0 0 25px 0;
+      font-weight: 600;
+      font-size: 2.2rem;
+      text-align: center;
+      color: #d81b60;
+      text-shadow: 0 0 8px #f48fb1aa;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #c2185b;
+    }
+    input[type="text"], select, input[type="file"], textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 2px solid #f8bbd0;
+      font-size: 1rem;
+      background: #fff5fb;
+      color: #880e4f;
+      box-shadow: inset 0 0 5px #f48fb1aa;
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+      font-family: 'Quicksand', sans-serif;
+    }
+    input[type="text"]:focus, select:focus, input[type="file"]:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 12px #f06292;
+      background-color: #ffe0ec;
+    }
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .btn-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    button {
+      background: #f06292;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    button:disabled {
+      background: #f8bbd0;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    button:hover:not(:disabled) {
+      background: #ec407a;
+      box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6);
+    }
+    .textareas {
+      margin-top: 25px;
+      display: flex;
+      gap: 20px;
+    }
+    .textareas > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .textareas label {
+      margin-bottom: 6px;
+      color: #ad1457;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 25px 20px 30px;
+      }
+      .textareas {
+        flex-direction: column;
+      }
+      .textareas > div {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="AES file encrypt and decrypt tool">
+    <h1>💖 AES Encrypt / Decrypt</h1>
+
+    <label for="key">🔑 Nhập mã khóa (tự do)</label>
+    <input type="text" id="key" placeholder="Nhập khóa mã hóa" spellcheck="false" autocomplete="off" aria-required="true" />
+
+    <label for="mode">🔄 Chọn chế độ</label>
+    <select id="mode" aria-label="Chọn chế độ mã hóa hoặc giải mã">
+      <option value="encrypt" selected>✨ Mã hóa</option>
+      <option value="decrypt">🔓 Giải mã</option>
+    </select>
+
+    <label for="fileInput">📁 Chọn file (ảnh, Word, Excel,...)</label>
+    <input type="file" id="fileInput" aria-describedby="fileHelp" />
+
+    <div class="btn-row">
+      <button id="processBtn">🛠️ Thực hiện</button>
+      <button id="downloadBtn" disabled>📥 Tải kết quả</button>
+    </div>
+
+    <div class="textareas" aria-live="polite" aria-atomic="true">
+      <div>
+        <label for="originalText">📜 Nội dung gốc (Base64)</label>
+        <textarea id="originalText" readonly spellcheck="false" aria-readonly="true"></textarea>
+      </div>
+      <div>
+        <label for="resultText">🎉 Kết quả</label>
+        <textarea id="resultText" readonly spellcheck="false" aria-readonly="true"></textarea>
+      </div>
+    </div>
+  </div>
+<script>
+</script>
+</body>
+</html>
